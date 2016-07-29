@@ -2,6 +2,7 @@ var express = require('express'),
     app = express(),
     watson = require('watson-developer-cloud'),
     jsonParser = require('body-parser').json(),
+    mockData = require('./mockData.json')
     request = require('request');
 
 app.use(express.static('public'));
@@ -12,22 +13,23 @@ var alchemy_data_news = watson.alchemy_data_news({
 });
 
 app.post('/search', function(req, res) {
-  console.log(req.body.send);
-  var params = {
-    start: 'now-1d',
-    end: 'now',
-    count: 5,
-    return: ['enriched.url.url,enriched.url.title'],
-    'q.enriched.url.enrichedTitle.keywords.keyword.text': req.body.send
-  }
-
-  alchemy_data_news.getNews(params, function (err, news) {
-  if (err)
-    console.log('error:', err);
-  else
-    console.log(JSON.stringify(news, null, 2));
-    res.send(news);
-  });
+  res.sendFile(__dirname + '/mockData.json');
+  // console.log(req.body.send);
+  // var params = {
+  //   start: 'now-1d',
+  //   end: 'now',
+  //   count: 5,
+  //   return: ['enriched.url.url,enriched.url.title'],
+  //   'q.enriched.url.enrichedTitle.keywords.keyword.text': req.body.send
+  // }
+  //
+  // alchemy_data_news.getNews(params, function (err, news) {
+  // if (err)
+  //   console.log('error:', err);
+  // else
+  //   console.log(JSON.stringify(news, null, 2));
+  //   res.send(news);
+  // });
 });
 
 app.listen(3000);
