@@ -1,0 +1,30 @@
+{
+  "name": "news-flash",
+  "version": "1.0.0",
+  "description": "A news search engine which searches for articles with a positive or negative bias.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zfwhite/news-flash.git"
+  },
+  "author": "Zachary White",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zfwhite/news-flash/issues"
+  },
+  "homepage": "https://github.com/zfwhite/news-flash#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-mocha": "^2.2.0",
+    "jade": "^1.11.0",
+    "request": "^2.74.0",
+    "watson-developer-cloud": "^2.0.0"
+  }
+}

@@ -1,0 +1,23 @@
+#main h1{
+  font-family: helvetica;
+  margin-left: 20px;
+}
+#bias {
+  text-align: center;
+}
+#search-box {
+  text-align: center;
+}
+#search-input {
+  width: 70%;
+  height: 35%;
+  border-radius: 4px;
+}
+.divider {
+  width: 100px;
+  height: auto;
+  display: inline-block;
+}
+.story-title {
+  font-size: 1.5em;
+}
