@@ -13,7 +13,7 @@ html(lang='en')
     div(id='main' class='container-fluid' ng-controller='searchController as search')
       div(class='row')
         h1 News Flash
-        h3(id='bias') Pick a Bias
+        h3(id='bias') Pick your Bias
         div(id='search-box' class='col-xs-4 col-xs-offset-4')
           button(class='btn btn-primary' ng-click='search.sendSearch()')
             i(class='fa fa-thumbs-up' aria-hidden='true')
@@ -26,7 +26,11 @@ html(lang='en')
       div(class='row')
         div(class='col-xs-8 col-xs-offset-2' id='results')
           h5(class='story-title' ng-repeat='story in search.newsStories')
-            a(href={{story.source.enriched.url.url}}) {{story.source.enriched.url.title}}
+            a(ng-href='{{story.source.enriched.url.url}}') {{story.source.enriched.url.title}}
+            br
+            br
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            br
 
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js')
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js')

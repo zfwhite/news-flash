@@ -21,3 +21,6 @@
 .story-title {
   font-size: 1.5em;
 }
+#results p {
+  text-indent: 30px;
+}
