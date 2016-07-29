@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title News Flash
+    // Bootstrap
+    link(href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='default.css')
+  body(ng-app='news')
+    div(id='main' class='container-fluid' ng-controller='searchController as search')
+      div(class='row')
+        h1 News Flash
+        h3(id='bias') Pick a Bias
+        div(id='search-box' class='col-xs-4 col-xs-offset-4')
+          button(class='btn btn-primary' ng-click='search.sendSearch()')
+            i(class='fa fa-thumbs-up' aria-hidden='true')
+          div(class='divider') - or -
+          button(class='btn btn-primary' ng-click='search.sendSearch()')
+            i(class='fa fa-thumbs-down' aria-hidden='true')
+          br
+          br
+          input(id='search-input' type='text' ng-model='search.term')
+      div(class='row')
+        div(class='col-xs-8 col-xs-offset-2' id='results')
+          h5(class='story-title' ng-repeat='story in search.newsStories')
+            a(href={{story.source.enriched.url.url}}) {{story.source.enriched.url.title}}
+
+    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js')
+    script(src='http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.3.js')
+    script(src='default.js')
