@@ -19,13 +19,9 @@ function search($http) {
       data: JSON.stringify({send})
     });
     sendRequest.then(function successCallback(response) {
-      // console.log(response);
-      // console.log(response.data.result.docs[0].source.enriched.url.title);
       response.data.result.docs.forEach(function(doc) {
         vm.newsStories.push(doc)
       });
-      // console.log('stories:' + vm.newsStories);
-
     })
     vm.term = null;
   }
