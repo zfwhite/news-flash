@@ -13,26 +13,28 @@ var alchemy_data_news = watson.alchemy_data_news({
 });
 
 app.post('/search', function(req, res) {
-  console.log(req.body.send);
-  var params = {
-    start: 'now-1d',
-    end: 'now',
-    count: 5,
-    return: ['enriched.url.url,enriched.url.title,enriched.url.text'],
-    'q.enriched.url.enrichedTitle.keywords.keyword.text': req.body.send
-  }
-
-  alchemy_data_news.getNews(params, function (err, news) {
-  if (err) {
-    console.log('error:', err);
-    res.sendFile(__dirname + '/mockData.json');
-  }
-  else {
-    console.log(JSON.stringify(news, null, 2));
-    res.send(news);
-  }
-  });
-  // res.sendFile(__dirname + '/mockData.json');
+  var rawSearch = req.body.send.split(' ').join('^');
+  var optimizedSearch = 'A[' + rawSearch + ']';
+  console.log(optimizedSearch);
+  // var params = {
+  //   start: 'now-1d',
+  //   end: 'now',
+  //   count: 5,
+  //   return: ['enriched.url.url,enriched.url.title,enriched.url.text'],
+  //   'q.enriched.url.enrichedTitle.keywords.keyword.text': optimizedSearch
+  // }
+  //
+  // alchemy_data_news.getNews(params, function (err, news) {
+  // if (err) {
+  //   console.log('error:', err);
+  //   res.sendFile(__dirname + '/mockData.json');
+  // }
+  // else {
+  //   console.log(JSON.stringify(news, null, 2));
+  //   res.send(news);
+  // }
+  // });
+  res.sendFile(__dirname + '/mockData.json');
 });
 
 app.listen(3000);
