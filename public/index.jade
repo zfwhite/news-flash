@@ -17,13 +17,14 @@ html(lang='en')
         div(id='search-box' class='col-xs-4 col-xs-offset-4')
           button(class='btn btn-primary' ng-click='search.sendSearch()')
             i(class='fa fa-thumbs-up' aria-hidden='true')
-          div(class='divider') - or -
+          div(class='divider')
+            p - or -
           button(class='btn btn-primary' ng-click='search.sendSearch()')
             i(class='fa fa-thumbs-down' aria-hidden='true')
           br
           br
           p(class='s')
-            input(id='search' placeholder='Search...' type='text' ng-model='search.term')
+            input(id='search' placeholder='Search...' type='text' ng-model='search.term' ng-minlength='1')
       div(class='row')
         div(class='col-xs-8 col-xs-offset-2' id='results')
           h5(class='story-title' ng-repeat='story in search.newsStories')
