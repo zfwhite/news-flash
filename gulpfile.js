@@ -1,7 +1,15 @@
 var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
-    jade = require('gulp-jade'),
-    assert = require('chai').assert;
+    jade = require('gulp-jade');
+
+gulp.task('test', function() {
+  gulp.src('./test/app.spec.js')
+    .pipe(mocha({reporter: 'nyan'}));
+});
+
+gulp.watch('./app.js', ['test']).on('change', function() {
+  console.log('Test was run.');
+})
 
 gulp.task('template', function() {
   gulp.src('./public/*.jade')
