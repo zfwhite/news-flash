@@ -9,6 +9,7 @@ function search($http) {
   vm.newsStories = [];
 
   vm.sendSearch = function() {
+    vm.newsStories = [];
     var send = vm.term;
     var sendRequest = $http({
       method: 'POST',
