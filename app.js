@@ -13,7 +13,8 @@ var alchemy_data_news = watson.alchemy_data_news({
 });
 
 app.post('/search/positive', function(req, res) {
-  if (req.body.send === '') {
+  console.log(req.body);
+  if (req.body.send == undefined) {
     res.send('blank');
   }
   var rawSearch = req.body.send.split(' ').join('^');
@@ -38,11 +39,12 @@ app.post('/search/positive', function(req, res) {
     res.send(news);
   }
   });
+
   // res.sendFile(__dirname + '/mockData.json');
 });
 
 app.post('/search/negative', function(req, res) {
-  if (req.body.send === '') {
+  if (req.body.send == undefined) {
     res.send('blank');
   }
   var rawSearch = req.body.send.split(' ').join('^');
