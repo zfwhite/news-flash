@@ -3,7 +3,7 @@ var express = require('express'),
     watson = require('watson-developer-cloud'),
     jsonParser = require('body-parser').json(),
     mockData = require('./mockData.json')
-    request = require('request');
+    addQuery = require('./data');
 
 app.use(express.static('public'));
 app.use(jsonParser);
@@ -13,13 +13,12 @@ var alchemy_data_news = watson.alchemy_data_news({
 });
 
 app.post('/search/positive', function(req, res) {
-  console.log(req.body);
   if (req.body.send == undefined) {
     res.send('blank');
   }
+  addQuery(req.body.send);
   var rawSearch = req.body.send.split(' ').join('^');
   var optimizedSearch = 'A[' + rawSearch + ']';
-  console.log(optimizedSearch);
   var params = {
     start: 'now-7d',
     end: 'now',
@@ -28,7 +27,7 @@ app.post('/search/positive', function(req, res) {
     'q.enriched.url.enrichedTitle.docSentiment': '|type=positive,score=>.7|',
     'q.enriched.url.enrichedTitle.keywords.keyword.text': optimizedSearch
   }
-
+  
   alchemy_data_news.getNews(params, function (err, news) {
   if (err) {
     console.log('error:', err);
@@ -40,16 +39,16 @@ app.post('/search/positive', function(req, res) {
   }
   });
 
-  // res.sendFile(__dirname + '/mockData.json');
+  res.sendFile(__dirname + '/mockData.json');
 });
 
 app.post('/search/negative', function(req, res) {
   if (req.body.send == undefined) {
     res.send('blank');
   }
+  addQuery(req.body.send);
   var rawSearch = req.body.send.split(' ').join('^');
   var optimizedSearch = 'A[' + rawSearch + ']';
-  console.log(optimizedSearch);
   var params = {
     start: 'now-7d',
     end: 'now',
@@ -69,6 +68,5 @@ app.post('/search/negative', function(req, res) {
     res.send(news);
   }
   });
-  // res.sendFile(__dirname + '/mockData.json');
 });
 app.listen(3000);
