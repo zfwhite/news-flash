@@ -20,6 +20,9 @@ function search($http) {
       data: JSON.stringify({send})
     });
     sendRequest.then(function successCallback(response) {
+      // if (response === 'blank') {
+      //   vm.newsStories = [];
+      // }
       response.data.result.docs.forEach(function(doc) {
         vm.newsStories.push(doc)
       });
