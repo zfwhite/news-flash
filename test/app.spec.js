@@ -5,7 +5,7 @@ describe('Tests user query.', function() {
   it('Sends a search term.', function(done) {
     request({
       method: 'POST',
-      url: 'http://localhost:3000/search'
+      url: 'http://localhost:3000/search/positive'
     }, function(error, response) {
       assert.equal(response.statusCode, 200);
       done();
