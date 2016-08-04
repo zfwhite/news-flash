@@ -7,8 +7,19 @@ search.$inject = ['$http'];
 function search($http) {
   var vm = this;
   vm.newsStories = [];
+  vm.searches = [];
+
+  vm.recentQueries = function() {
+    $http.get('/recent').then(function successCallback(response) {
+      vm.newsStories = [];
+      response.data.forEach(function(search) {
+        vm.searches.push(search);
+      })
+    })
+  }
 
   vm.sendPositive = function() {
+    vm.searches = [];
     vm.newsStories = [];
     var send = vm.term;
     var sendRequest = $http({
@@ -28,6 +39,7 @@ function search($http) {
   }
 
   vm.sendNegative = function() {
+    vm.searches = [];
     vm.newsStories = [];
     var send = vm.term;
     var sendRequest = $http({

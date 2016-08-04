@@ -27,6 +27,8 @@ html(lang='en')
           br
           p(class='s')
             input(id='search' placeholder='Search...' type='text' ng-model='search.term')
+          p
+            a(ng-click='search.recentQueries()') Recent Searches
       div(class='row')
         div(class='col-xs-8 col-xs-offset-2' id='results')
           h5(class='story-title' ng-repeat='story in search.newsStories')
@@ -35,6 +37,8 @@ html(lang='en')
             br
             p {{story.source.enriched.url.text}}
             br
+          h3(ng-repeat='search in search.searches')
+            p {{search.query}}
 
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js')
     script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js')
