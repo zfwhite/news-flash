@@ -1,4 +1,5 @@
-var Client = require('mongodb');
+var Client = require('mongodb'),
+    moment = require('moment');
 
 var url = 'mongodb://localhost:27017/news';
 
@@ -8,9 +9,8 @@ function add(search) {
   var addSearch = function(db, search) {
     var collection = db.collection('search');
 
-    collection.insertOne(
-      {query: search}, function(err, result) {
-        console.log('Added query.');
+    collection.insert(
+      {query: search, time: moment().format('MMM Do YYYY, h:mm:ss a')}, function(err, result) {
         db.close();
       });
   }
