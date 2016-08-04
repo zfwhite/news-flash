@@ -3,13 +3,28 @@ var express = require('express'),
     watson = require('watson-developer-cloud'),
     jsonParser = require('body-parser').json(),
     mockData = require('./mockData.json')
-    addQuery = require('./data');
+    addQuery = require('./data/add.js'),
+    Client = require('mongodb');
 
 app.use(express.static('public'));
 app.use(jsonParser);
 
 var alchemy_data_news = watson.alchemy_data_news({
   api_key: '3333158ad0e2ef353a7944bcf42b47016a390b7b'
+});
+
+app.get('/recent', function(req, res) {
+  var url = 'mongodb://localhost:27017/news';
+
+  Client.connect(url, function(err, db) {
+    var recentSearch = function(db) {
+    var collection = db.collection('search').find({'query': {$ne: null}}).sort({_id: -1}).limit(10).toArray(function(err, doc) {
+        res.send(doc);
+      });
+    }
+    recentSearch(db);
+    db.close();
+  });
 });
 
 app.post('/search/positive', function(req, res) {
@@ -27,7 +42,7 @@ app.post('/search/positive', function(req, res) {
     'q.enriched.url.enrichedTitle.docSentiment': '|type=positive,score=>.7|',
     'q.enriched.url.enrichedTitle.keywords.keyword.text': optimizedSearch
   }
-  
+
   alchemy_data_news.getNews(params, function (err, news) {
   if (err) {
     console.log('error:', err);
@@ -38,8 +53,7 @@ app.post('/search/positive', function(req, res) {
     res.send(news);
   }
   });
-
-  res.sendFile(__dirname + '/mockData.json');
+  // res.sendFile(__dirname + '/mockData.json');
 });
 
 app.post('/search/negative', function(req, res) {
@@ -68,5 +82,6 @@ app.post('/search/negative', function(req, res) {
     res.send(news);
   }
   });
+  // res.sendFile(__dirname + '/mockData.json');
 });
 app.listen(3000);
